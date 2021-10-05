@@ -1,0 +1,22 @@
+{
+  "name": "react-easy-crop-example-with-local-storage-sync",
+  "version": "1.0.0",
+  "description": "A React component to crop images with easy interactions.\n\nAfter changing the crop, you can refresh the browser view and see that the crop remains as set before.",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "4.11.3",
+    "@rehooks/local-storage": "1.4.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-easy-crop": "latest",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
