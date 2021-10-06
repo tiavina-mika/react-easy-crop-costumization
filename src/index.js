@@ -23,13 +23,15 @@ const App = () => {
     (croppedArea, croppedAreaPixels) => {
       if (!originalImageSize) return
       console.log('originalImageSize: ', originalImageSize)
-      const imageWidth = originalImageSize.width * (croppedArea.width / 100)
-      const imageHeight = originalImageSize.height * (croppedArea.height / 100)
-      console.log('finalImage: ', { width: imageWidth, height: imageHeight })
-
+      const zoomedImageWidth = originalImageSize.width * zoom
+      const zoomedImageHeight = originalImageSize.height * zoom
+      console.log('finalImage: ', {
+        width: Math.round(zoomedImageWidth),
+        height: Math.round(zoomedImageHeight),
+      })
       console.log(croppedArea, croppedAreaPixels)
     },
-    [originalImageSize]
+    [originalImageSize, zoom]
   )
 
   const onMediaLoaded = (mediaSize) => {
