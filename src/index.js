@@ -15,9 +15,22 @@ const App = () => {
   const [initialZoom, setInitialZoom] = useState(1)
   const [originalImageSize, setOriginalImageSize] = useState(null)
 
-  // const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-  //   console.log(croppedArea, croppedAreaPixels)
-  // }, []);
+  const onMediaLoaded = (mediaSize) => {
+    setOriginalImageSize({
+      width: mediaSize.naturalWidth,
+      height: mediaSize.naturalHeight,
+    })
+    let defaultZoom
+
+    if (mediaSize.naturalHeight >= mediaSize.naturalWidth) {
+      defaultZoom = MASK_WIDTH / mediaSize.naturalWidth
+    } else {
+      defaultZoom = MASK_WIDTH / mediaSize.naturalHeight
+    }
+
+    setZoom(defaultZoom)
+    setInitialZoom(defaultZoom)
+  }
 
   const onCropComplete = useCallback(
     (croppedArea, croppedAreaPixels) => {
@@ -25,6 +38,11 @@ const App = () => {
       console.log('originalImageSize: ', originalImageSize)
       const zoomedImageWidth = originalImageSize.width * zoom
       const zoomedImageHeight = originalImageSize.height * zoom
+
+      const top = (originalImageSize.height - croppedAreaPixels.height) / 2
+      console.log('top', top)
+      const left = (originalImageSize.width - croppedAreaPixels.width) / 2
+      console.log('left', left)
       console.log('finalImage: ', {
         width: Math.round(zoomedImageWidth),
         height: Math.round(zoomedImageHeight),
@@ -33,20 +51,6 @@ const App = () => {
     },
     [originalImageSize, zoom]
   )
-
-  const onMediaLoaded = (mediaSize) => {
-    setOriginalImageSize({ width: mediaSize.width, height: mediaSize.height })
-    let defaultZoom
-
-    if (mediaSize.height >= mediaSize.width) {
-      defaultZoom = MASK_WIDTH / mediaSize.width
-    } else {
-      defaultZoom = MASK_WIDTH / mediaSize.height
-    }
-
-    setZoom(defaultZoom)
-    setInitialZoom(defaultZoom)
-  }
 
   return (
     <div
